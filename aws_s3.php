@@ -645,11 +645,11 @@ function backup_file($atts,$content=null,$shortcode){
 	extract( shortcode_atts( array(
 		'config'=>'',
 		'keyname'=>'',
-		'bucket'=>'',
+		'source_bucket'=>'',
 		'destination_bucket'=>''
 		), $atts) );	
 	
-	$atts['bucket']= isset($config['bucket']) ? $config['bucket'] : '';
+	
 	
 	//check required fields
 	$input_res=check_required_input($atts);
@@ -658,13 +658,13 @@ function backup_file($atts,$content=null,$shortcode){
 	}
 	
 	//connect to s3 
-	$s3=connect_s3($config);
+	$s3=connectS3($config);
 	
 	try {
 		$s3->copyObject([
-		   'Bucket'     => $atts['bucket'],
+		   'Bucket'     => $destination_bucket,
 		   'Key'        => $keyname,
-		   'CopySource' => $destination_bucket."/$keyname"
+		   'CopySource' => $source_bucket."/$keyname"
 		]);
 		
 	$result_ack=array('status'=>'success','message'=>'email found');	
@@ -677,17 +677,6 @@ function backup_file($atts,$content=null,$shortcode){
 }
 
 function connectS3($config){
-	
-	//**required parameters to connect**//
-	$connect_array['IAM_KEY']=isset($config['IAM_KEY']) ? $config['IAM_KEY'] : '';
-	$connect_array['IAM_SECRET']=isset($config['IAM_SECRET']) ? $config['IAM_SECRET'] : '';
-	$connect_array['aws_version']=isset($config['aws_version']) ? $config['aws_version'] : '';
-	$connect_array['aws_region']=isset($config['aws_region']) ? $config['aws_region'] : '';
-
-	$res=check_required_input($connect_array);
-	if($res['status']==='error'){
-	return $res;
-	}
 	
 	$s3 = S3Client::factory(
       array(
