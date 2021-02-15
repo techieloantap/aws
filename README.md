@@ -115,3 +115,25 @@ Aws S3 shortcode which will handle all the operation of aws S3 like fetch get et
  	```
  		 [aws_s3.move_file_to_bucket source="{template.local_path}/{template.file_name}" destination="<template.s3_path>" config=<config-array> bucket_name="<bucket-name>" o.set=template.ack/]
  	```
+	
+ ## Copy object from one bucket to another bucket 
+	###### Input:
+	config : <array>
+		keyname : string
+		source_bucket : <string>
+		destination_bucket : <string>
+		
+	```
+		[aws_s3.backup_file config="{template.config}" keyname="{template.key_name}" source_bucket="{template.config.bucket}" destination_bucket="{template.config.backup_bucket}" o.set=template.res/]
+	```
+	
+ ## Fetch email sample (SES)
+		
+	###### Input:
+		file_path   : <string>
+		config 		: <array>
+		keyname 	: <string>	
+		regex_check	: <array>
+	``` 
+	 [aws_ses.fetch_ses_email config="{template.config}"  keyname="{template.key_name}" file_path="{template.file_path}" regex_check={caws.config.regex_pattern} o.set=template.result/]
+	```

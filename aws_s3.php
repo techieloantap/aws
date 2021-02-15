@@ -104,7 +104,7 @@ function put_file_contents($atts,$content=null,$shortcode){
 		bucket_name : <string>
 		config      : <array>
 		path      : <string>
-		file_name   : 
+		
 **/
 
 \aw2_library::add_service('aws_s3.delete_file','Delete File',['namespace'=>__NAMESPACE__]);
@@ -115,8 +115,7 @@ function delete_file($atts,$content=null,$shortcode){
 	extract( shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
-		'path'=>'',
-		'file_name'=>'',
+		'path'=>''		
 		), $atts) );
 		
 		$client=connectS3($config);
@@ -637,7 +636,7 @@ function download_public_file($atts,$content=null,$shortcode=null){
 	
 */
 
-\aw2_library::add_service('aws_ses.backup_file','Take Backup, copy object',['namespace'=>__NAMESPACE__]);
+\aw2_library::add_service('aws_s3.backup_file','Take Backup, copy object',['namespace'=>__NAMESPACE__]);
 
 function backup_file($atts,$content=null,$shortcode){
 	
