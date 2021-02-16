@@ -675,6 +675,31 @@ function backup_file($atts,$content=null,$shortcode){
 	return $result_ack;
 }
 
+\aw2_library::add_service('aws_s3.copy_to_bucket','copy file into s3 bucket',['namespace'=>__NAMESPACE__]);
+	function copy_to_bucket($atts,$content=null,$shortcode=null){
+		
+		if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
+		extract( shortcode_atts( array(
+			'config'=>'',
+			'bucket_name'=>'',
+			'source'=>'',
+			'destination'=>''
+		), $atts) );
+		try{
+			
+			$client=connectS3($config);
+			$client->putObject(array(
+			'Bucket'     => $bucket_name,
+			'Key'        => $destination,
+			'Body'   => fopen($source, 'r')
+			));
+			return array("status"=>"success","message"=> 'File moved successfully');
+			
+		}catch(S3Exception $e) {
+			return array("status"=>"error","message"=> $e->getMessage());
+	}
+}
+
 function connectS3($config){
 	
 	$s3 = S3Client::factory(
