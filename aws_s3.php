@@ -583,7 +583,7 @@ function download_public_file($atts,$content=null,$shortcode=null){
 			$client->registerStreamWrapper();
 			
 			$info = $client->doesObjectExist($bucket_name, $source);
-			echo $destination;
+			
 		if($info){				
 					
 				$cmd = $client->getCommand('GetObject', [
