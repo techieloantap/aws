@@ -710,7 +710,7 @@ function backup_file($atts,$content=null,$shortcode){
 		download_path : <string>
 **/
 
-\aw2_library::add_service('aws_s3.create_zip_file','create zip locally',['namespace'=>__NAMESPACE__]);
+\aw2_library::add_service('aws_s3.create_zip_file','create zip locally',['namespace'=>__NAMESPACE__]); 
 function create_zip_file($atts,$content=null,$shortcode){
 	
 	$zip = new \ZipArchive();
