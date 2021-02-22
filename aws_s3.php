@@ -700,6 +700,70 @@ function backup_file($atts,$content=null,$shortcode){
 	}
 }
 
+
+/**
+	Desc : This will create zip file All Files
+	Input: 
+		bucket_name : <string>
+		config      : <array>
+		path 		: <string>
+		download_path : <string>
+**/
+
+\aw2_library::add_service('aws_s3.create_zip_file','create zip locally',['namespace'=>__NAMESPACE__]);
+function create_zip_file($atts,$content=null,$shortcode){
+	
+	$zip = new \ZipArchive();
+	$time=time();
+	
+	
+	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
+	extract( shortcode_atts( array(
+		'config'=>'',
+		'bucket_name'=>'',
+		'path'=>'',
+		'download_path'=>''
+		
+		), $atts) );
+			
+	$zip->open($download_path, \ZipArchive::CREATE);
+		
+	$client=connectS3($config);
+		
+	try {
+			$client->registerStreamWrapper();
+			
+			// Get the object.
+			$objects = $client->getIterator('ListObjects', array(
+			'Bucket' => $bucket_name,
+			'Prefix' => $path
+			));
+		
+		if(!is_dir("s3://{$bucket_name}/$path")){
+			return array("status"=>"error","message"=> "Directory not found");
+		}		
+		
+		foreach ($objects as $object) {
+			
+		$contents = file_get_contents("s3://{$bucket_name}/{$object['Key']}"); // get file
+		$zip->addFromString($object['Key'], $contents); // add file contents in zip
+		}
+		
+		$zip->close();
+
+		if(file_exists($download_path)){			
+			return array("status"=>"success","message"=> "file created successfully");
+		}else{
+			return array("status"=>"success","message"=> "unable to create file");
+		}
+
+		
+		
+	} catch (S3Exception $e) {
+		return array("status"=>"error","message"=> $e->getMessage());
+	}
+}
+
 function connectS3($config){
 	
 	$s3 = S3Client::factory(
