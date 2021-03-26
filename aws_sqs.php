@@ -17,7 +17,7 @@ function receive_sqs_message($atts,$content=null,$shortcode){
 	$client = sqsConnect($config);
 
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'queueUrl'=>''
 		), $atts) );	
