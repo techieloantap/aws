@@ -20,7 +20,7 @@ use Aws\Exception\AwsException;
 function create_https_subscription($atts,$content=null,$shortcode){	
 
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'endpoint'=>'',
 		'topic'=>''
@@ -59,7 +59,7 @@ function create_https_subscription($atts,$content=null,$shortcode){
 function create_sqs_subscription($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'endpoint'=>'',
 		'topic'=>''
@@ -100,7 +100,7 @@ function create_sqs_subscription($atts,$content=null,$shortcode){
 function publish_message($atts,$content=null,$shortcode){ 
 		
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'message'=>'',
 		'topic'=>''
@@ -137,7 +137,7 @@ function publish_message($atts,$content=null,$shortcode){
 function create_topic($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'topic_name'=>''
 		), $atts) );
@@ -174,7 +174,7 @@ function create_topic($atts,$content=null,$shortcode){
 function delete_topic($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'topic_arn'=>''
 		), $atts) );
