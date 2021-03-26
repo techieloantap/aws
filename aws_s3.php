@@ -15,7 +15,7 @@ use Aws\S3\Exception\S3Exception;
 function get_file_contents($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'path'=>''
 		), $atts) );	
@@ -64,7 +64,7 @@ function get_file_contents($atts,$content=null,$shortcode){
 function put_file_contents($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'path'=>'',
 		'contents'=>''
@@ -112,7 +112,7 @@ function put_file_contents($atts,$content=null,$shortcode){
 function delete_file($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>''		
@@ -156,7 +156,7 @@ function delete_file($atts,$content=null,$shortcode){
 function delete_all_files($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>''		
@@ -221,7 +221,7 @@ function delete_all_files($atts,$content=null,$shortcode){
 function read_file($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>'',
@@ -269,7 +269,7 @@ function download_file($atts,$content=null,$shortcode){
 	
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>''
@@ -328,7 +328,7 @@ function download_all($atts,$content=null,$shortcode){
 	
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>'',
@@ -388,7 +388,7 @@ function download_all($atts,$content=null,$shortcode){
 function get_files($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>'',
@@ -445,7 +445,7 @@ function get_files($atts,$content=null,$shortcode){
 function does_object_exists($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'key'=>''
@@ -490,7 +490,7 @@ function does_object_exists($atts,$content=null,$shortcode){
 function move_file_to_bucket($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'source'=>'',
@@ -513,7 +513,7 @@ function move_file_to_bucket($atts,$content=null,$shortcode=null){
 function move_directory_to_bucket($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'source'=>'',
@@ -569,7 +569,7 @@ function move_file($client,$bucket_name,$file_name,$destination){
 function download_public_file($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-		extract( shortcode_atts( array(
+		extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'destination'=>'',
@@ -641,7 +641,7 @@ function download_public_file($atts,$content=null,$shortcode=null){
 function backup_file($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'keyname'=>'',
 		'source_bucket'=>'',
@@ -679,7 +679,7 @@ function backup_file($atts,$content=null,$shortcode){
 	function copy_to_bucket($atts,$content=null,$shortcode=null){
 		
 		if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-		extract( shortcode_atts( array(
+		extract( \aw2_library::shortcode_atts( array(
 			'config'=>'',
 			'bucket_name'=>'',
 			'source'=>'',
@@ -718,7 +718,7 @@ function create_zip_file($atts,$content=null,$shortcode){
 	
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>'',
