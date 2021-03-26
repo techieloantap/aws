@@ -19,7 +19,7 @@ use Aws\S3\Exception\S3Exception;
 function fetch_ses_email($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'file_path'=>'',
 		'keyname'=>'',
@@ -125,7 +125,7 @@ function fetch_ses_email($atts,$content=null,$shortcode){
 function save_email_attachment($atts,$content=null,$shortcode){	 
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'source'=>'',
 		'destination'=>''
 		), $atts) );	
@@ -181,7 +181,7 @@ function save_email_attachment($atts,$content=null,$shortcode){
 function fetch_all_emails($atts,$content=null,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
-	extract( shortcode_atts( array(
+	extract( \aw2_library::shortcode_atts( array(
 		'config'=>''		
 		), $atts) );	
 	
