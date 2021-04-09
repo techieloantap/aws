@@ -177,20 +177,23 @@ function delete_all_files($atts,$content=null,$shortcode){
 				'Bucket' => $bucket_name,
 				'Prefix' => $path
 			]); 
-			foreach ($keys['Contents'] as $key)
+			if(isset($keys['Contents'])&& !(empty($keys['Contents'])))
 			{
-				$ctr++;
-				$client->deleteObjects([
-					'Bucket'  => $bucket_name,
-					'Delete' => [
-						'Objects' => [
-							[
+				foreach ($keys['Contents'] as $key)
+				{
+					$ctr++;
+					$client->deleteObjects([
+						'Bucket'  => $bucket_name,
+						'Delete' => [
+							'Objects' => [
+								[
 
-								'Key' => $key['Key']
+									'Key' => $key['Key']
+								]
 							]
 						]
-					]
-				]);
+					]);
+				}
 			}
 			
 		
@@ -352,11 +355,11 @@ function download_all($atts,$content=null,$shortcode){
 		if(!is_dir("s3://{$bucket_name}/$path")){
 			return array("status"=>"error","message"=> "Directory not found");
 		}		
-		
-		foreach ($objects as $object) {
-			
-		$contents = file_get_contents("s3://{$bucket_name}/{$object['Key']}"); // get file
-		$zip->addFromString($object['Key'], $contents); // add file contents in zip
+	    if(isset($objects) && !(empty($objects)) ){
+			foreach ($objects as $object) {			
+				$contents = file_get_contents("s3://{$bucket_name}/{$object['Key']}"); // get file
+				$zip->addFromString($object['Key'], $contents); // add file contents in zip
+			}
 		}
 		
 		$zip->close();
@@ -412,19 +415,20 @@ function get_files($atts,$content=null,$shortcode){
 		'Prefix'=>$path."/"
 	]);
 	
-		
-	foreach ($objects['Contents']  as $object) {
-		$file_name=substr($object['Key'], strrpos($object['Key'], '/') + 1);
-		if(!empty($search)){
-			preg_match("/$search/", $file_name, $matches);			
-			if(isset($matches[0]) && ($matches[0]!='') ){				
+	if(isset($objects['Contents']) && !(empty($objects['Contents'])) ){
+		foreach ($objects['Contents']  as $object) {
+			$file_name=substr($object['Key'], strrpos($object['Key'], '/') + 1);
+			if(!empty($search)){
+				preg_match("/$search/", $file_name, $matches);			
+				if(isset($matches[0]) && ($matches[0]!='') ){				
+					$files[]= array('basename'=>$file_name,"filesize"=>$object['Size']);
+				}
+			}else{
 				$files[]= array('basename'=>$file_name,"filesize"=>$object['Size']);
 			}
-		}else{
-			$files[]= array('basename'=>$file_name,"filesize"=>$object['Size']);
+			 
 		}
-		 
-	} 
+	}	
 	
 	return array("status"=>"success","message"=> 'found','files'=>$files);
 	
@@ -528,14 +532,17 @@ function move_directory_to_bucket($atts,$content=null,$shortcode=null){
 	
 	$files = scandir($source, 1);
 	$ctr=0;
-	
-	foreach($files as $key){
-		if (!in_array($key,array(".",".."))){	
-			$ctr++;	
-			$file_name=$source."/".$key;
-			
-			$msg[]=move_file($client,$bucket_name,$file_name,$destination);
-			
+	if(isset($files) && ! empty($files) )
+	{
+		foreach($files as $key)
+		{
+			if (!in_array($key,array(".",".."))){	
+				$ctr++;	
+				$file_name=$source."/".$key;
+				
+				$msg[]=move_file($client,$bucket_name,$file_name,$destination);
+				
+			}
 		}
 	}
 	if($ctr==0){
@@ -742,11 +749,13 @@ function create_zip_file($atts,$content=null,$shortcode){
 		if(!is_dir("s3://{$bucket_name}/$path")){
 			return array("status"=>"error","message"=> "Directory not found");
 		}		
-		
-		foreach ($objects as $object) {
-			
-		$contents = file_get_contents("s3://{$bucket_name}/{$object['Key']}"); // get file
-		$zip->addFromString($object['Key'], $contents); // add file contents in zip
+		if(isset($objects) && ! empty($object))
+		{
+			foreach ($objects as $object) 
+			{			
+				$contents = file_get_contents("s3://{$bucket_name}/{$object['Key']}"); // get file
+				$zip->addFromString($object['Key'], $contents); // add file contents in zip
+			}
 		}
 		
 		$zip->close();
@@ -788,13 +797,19 @@ function connectS3($config){
 function check_required_input($input){
 	
 	$required_field=array();
-	foreach($input as $key => $val){
-		if(empty($val)){
-			$required_field[]="$key parameter is required";
+	if(isset($input) && !empty($input))
+	{
+		foreach($input as $key => $val)
+		{
+			if(empty($val))
+			{
+				$required_field[]="$key parameter is required";
+			}	
 		}
 	}
 	
-	if(!empty($required_field)){
+	if(!empty($required_field))
+	{
 		return array('status'=>'error','message'=>'missing required parameters ','errors'=>$required_field);
 	}
 }
