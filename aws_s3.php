@@ -836,7 +836,7 @@ function get_presigned_file_url($atts,$content=null,$shortcode=null){
 		), $atts) );
 		
 		try {
-			$valid_till = ($valid_till)?7;
+			$valid_till = ($valid_till)?:7;
 			$client=connectS3($config);
 			$client->registerStreamWrapper();
 			$info = $client->doesObjectExist($bucket_name, $path);
