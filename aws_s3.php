@@ -827,26 +827,27 @@ function check_required_input($input){
 \aw2_library::add_service('aws_s3.get_presigned_file_url','Presigned File Url',['namespace'=>__NAMESPACE__]);
 function get_presigned_file_url($atts,$content=null,$shortcode=null){
 	
-	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
+	if(\aw2_library::pre_actions('all',$atts,$content=null,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
 		'config'=>'',
 		'bucket_name'=>'',
 		'path'=>'',
 		'valid_till'=>''
 		), $atts) );
-		
+
 		try {
-			$valid_till = ($valid_till)?:7;
+			
+			$valid_till = ($valid_till)?:1;
 			$client=connectS3($config);
 			$client->registerStreamWrapper();
 			$info = $client->doesObjectExist($bucket_name, $path);
-			
+
 			if($info){
 				$cmd = $client->getCommand('GetObject', [
 					'Bucket' => $bucket_name,
 					'Key' => $path	
 				]);
-				$request = $client->createPresignedRequest($cmd, '+7 days');
+				$request = $client->createPresignedRequest($cmd, "+$valid_till days");
 				$presigned_url = (string)$request->getUri();
 				return array("status"=>"success","message"=> 'Presigned File Url generated successfully','data'=>$presigned_url);
 			}else{
