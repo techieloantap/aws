@@ -774,17 +774,17 @@ function create_zip_file($atts,$content=null,$shortcode){
 }
 
 function connectS3($config){
-	
-	$s3 = S3Client::factory(
-      array(
-        'credentials' => array(
-          'key' => $config['IAM_KEY'],
-          'secret' => $config['IAM_SECRET']
-        ),
+    
+    $s3 = new S3Client([
+        'credentials' => [
+            'key'    => $config['IAM_KEY'],
+            'secret' => $config['IAM_SECRET'],
+        ],
         'version' => $config['aws_version'],
-        'region'  => $config['aws_region']
-      ));
-	return $s3;
+        'region'  => $config['aws_region'],
+        'suppress_php_deprecation_warning' => true
+    ]);
+    return $s3;
 }
 
 /*
