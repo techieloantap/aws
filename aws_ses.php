@@ -271,5 +271,6 @@ function check_required_input($input){
 	if(!empty($required_field)){
 		return array('status'=>'error','message'=>'missing required parameters ','errors'=>$required_field);
 	}
+	return array('status'=>'success','message'=>'validation pass');
 }
 
