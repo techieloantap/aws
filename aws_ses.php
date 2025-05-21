@@ -236,21 +236,20 @@ function connect_s3($config){
 	$connect_array['aws_region']=isset($config['aws_region']) ? $config['aws_region'] : '';
 	
 	$res=check_required_input($connect_array);
-	if($res['status']==='error'){
+	if(isset($res['status']) && $res['status']==='error'){
 		return $res;
 	}
 	
-	$s3 = S3Client::factory(
-      array(
-        'credentials' => array(
-          'key' => $config['IAM_KEY'],
-          'secret' => $config['IAM_SECRET']
-        ),
+	$s3 = new S3Client([
+        'credentials' => [
+            'key'    => $config['IAM_KEY'],
+            'secret' => $config['IAM_SECRET'],
+        ],
         'version' => $config['aws_version'],
-        'region'  => $config['aws_region']
-      ));
-	  
-	return $s3;
+        'region'  => $config['aws_region'],
+        'suppress_php_deprecation_warning' => true
+    ]);
+    return $s3;
 }
 
 /*
