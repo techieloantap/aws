@@ -659,7 +659,7 @@ function backup_file($atts,$content=null,$shortcode){
 	
 	//check required fields
 	$input_res=check_required_input($atts);
-	if($input_res['status']==='error'){
+	if(isset($input_res['status']) && $input_res['status']==='error'){
 		return $input_res;
 	}
 	
@@ -795,7 +795,7 @@ function connectS3($config){
 	
 */
 function check_required_input($input){
-	
+
 	$required_field=array();
 	if(isset($input) && !empty($input))
 	{
@@ -812,6 +812,8 @@ function check_required_input($input){
 	{
 		return array('status'=>'error','message'=>'missing required parameters ','errors'=>$required_field);
 	}
+
+	return array('status'=>'success','message'=>'validation passed');
 }
 
 /**
