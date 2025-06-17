@@ -247,10 +247,10 @@ function read_file($atts,$content=null,$shortcode){
 			'Key'    => $file_info['dirname']."/".$file_info['basename'],
 			'Prefix'=>$file_info['dirname']
 		]);
-
+		if (ob_get_level()) ob_end_clean();
 
 		header("Content-Type: {$result['ContentType']}");
-
+		 
 		echo  $result['Body'];
 
 
@@ -295,7 +295,7 @@ function download_file($atts,$content=null,$shortcode){
 			'Prefix'=>$file_info['dirname']
 		]);
 	
-		
+		if (ob_get_level()) ob_end_clean();
 		//turn off output buffering to decrease cpu usage
 	    //@ob_end_clean(); 
 		header("Content-Description: File Transfer"); 
