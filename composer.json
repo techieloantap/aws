@@ -16,18 +16,23 @@
         "docs": "https://www.getawesomestudio.com/enterprise-tutorial/"
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=8.0",
         "composer/installers": "~1.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "aws/aws-sdk-php": "^3.171",
-		"php-mime-mail-parser/php-mime-mail-parser" :"5.0.5"
+		"ext-mailparse": "*",
+		"php-mime-mail-parser/php-mime-mail-parser" :"^10.0"
     },
 	 "extra": { 
 		"installer-name": "aws"
     },
     "config": {
 		"process-timeout": 600,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
 	"prefer-stable": true
 }
