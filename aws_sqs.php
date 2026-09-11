@@ -12,7 +12,7 @@ use Aws\Exception\AwsException;
 **/
 
 \aw2_library::add_service('aws_s3.get_file_contents','Receive SQS Message',['namespace'=>__NAMESPACE__]);
-function receive_sqs_message($atts,$content=null,$shortcode){
+function receive_sqs_message($atts,$content,$shortcode){
 	
 	$client = sqsConnect($config);
 
