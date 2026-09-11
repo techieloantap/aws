@@ -122,7 +122,7 @@ function fetch_ses_email($atts,$content=null,$shortcode=null){
 
 \aw2_library::add_service('aws_ses.save_email_attachment','Save Email Attachment',['namespace'=>__NAMESPACE__]);
 
-function save_email_attachment($atts,$content=null,$shortcode){	 
+function save_email_attachment($atts,$content=null,$shortcode=null){	 
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
