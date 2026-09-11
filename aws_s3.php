@@ -12,7 +12,7 @@ use Aws\S3\Exception\S3Exception;
 **/
 
 \aw2_library::add_service('aws_s3.get_file_contents','File Get Contents',['namespace'=>__NAMESPACE__]);
-function get_file_contents($atts,$content,$shortcode){
+function get_file_contents($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -61,7 +61,7 @@ function get_file_contents($atts,$content,$shortcode){
 
 \aw2_library::add_service('aws_s3.put_file_contents','File Put Contents',['namespace'=>__NAMESPACE__]);
 
-function put_file_contents($atts,$content=null,$shortcode){
+function put_file_contents($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -109,7 +109,7 @@ function put_file_contents($atts,$content=null,$shortcode){
 
 \aw2_library::add_service('aws_s3.delete_file','Delete File',['namespace'=>__NAMESPACE__]);
 
-function delete_file($atts,$content=null,$shortcode){
+function delete_file($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -153,7 +153,7 @@ function delete_file($atts,$content=null,$shortcode){
 
 \aw2_library::add_service('aws_s3.delete_all_files','Delete File',['namespace'=>__NAMESPACE__]);
 
-function delete_all_files($atts,$content=null,$shortcode){
+function delete_all_files($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -221,7 +221,7 @@ function delete_all_files($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.read_file','Read File',['namespace'=>__NAMESPACE__]);
-function read_file($atts,$content=null,$shortcode){
+function read_file($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -268,7 +268,7 @@ function read_file($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.download_file','Download File',['namespace'=>__NAMESPACE__]);
-function download_file($atts,$content=null,$shortcode){
+function download_file($atts,$content=null,$shortcode=null){
 	
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
@@ -324,7 +324,7 @@ function download_file($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.download_all','Download All Files',['namespace'=>__NAMESPACE__]);
-function download_all($atts,$content=null,$shortcode){
+function download_all($atts,$content=null,$shortcode=null){
 	
 	$zip = new \ZipArchive();
 	$time=time();
@@ -388,7 +388,7 @@ function download_all($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.get_files','Get All Files from bucket',['namespace'=>__NAMESPACE__]);
-function get_files($atts,$content=null,$shortcode){
+function get_files($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -446,7 +446,7 @@ function get_files($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.does_object_exists','check object is exists or not',['namespace'=>__NAMESPACE__]);
-function does_object_exists($atts,$content=null,$shortcode){
+function does_object_exists($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -645,7 +645,7 @@ function download_public_file($atts,$content=null,$shortcode=null){
 
 \aw2_library::add_service('aws_s3.backup_file','Take Backup, copy object',['namespace'=>__NAMESPACE__]);
 
-function backup_file($atts,$content=null,$shortcode){
+function backup_file($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
@@ -718,7 +718,7 @@ function backup_file($atts,$content=null,$shortcode){
 **/
 
 \aw2_library::add_service('aws_s3.create_zip_file','create zip locally',['namespace'=>__NAMESPACE__]); 
-function create_zip_file($atts,$content=null,$shortcode){
+function create_zip_file($atts,$content=null,$shortcode=null){
 	
 	$zip = new \ZipArchive();
 	$time=time();
