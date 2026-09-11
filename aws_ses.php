@@ -178,7 +178,7 @@ function save_email_attachment($atts,$content=null,$shortcode=null){
 
 \aw2_library::add_service('aws_ses.fetch_all_emails','fetch all emails from bucket',['namespace'=>__NAMESPACE__]);
 
-function fetch_all_emails($atts,$content=null,$shortcode){
+function fetch_all_emails($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
