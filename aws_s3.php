@@ -12,7 +12,7 @@ use Aws\S3\Exception\S3Exception;
 **/
 
 \aw2_library::add_service('aws_s3.get_file_contents','File Get Contents',['namespace'=>__NAMESPACE__]);
-function get_file_contents($atts,$content=null,$shortcode){
+function get_file_contents($atts,$content,$shortcode){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
