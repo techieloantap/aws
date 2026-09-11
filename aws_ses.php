@@ -16,7 +16,7 @@ use Aws\S3\Exception\S3Exception;
 **/
 
 \aw2_library::add_service('aws_ses.fetch_ses_email','Get Email',['namespace'=>__NAMESPACE__]);
-function fetch_ses_email($atts,$content=null,$shortcode){
+function fetch_ses_email($atts,$content=null,$shortcode=null){
 	
 	if(\aw2_library::pre_actions('all',$atts,$content,$shortcode)==false)return;
 	extract( \aw2_library::shortcode_atts( array(
